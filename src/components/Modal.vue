@@ -31,8 +31,10 @@ export default{
             this.alertaAgregado()
             //cerramos el modal
             this.cerrarModal()
+            //vacio los campos del formulario
+            this.vaciarFormulario()
             // se recarga la pagina den un segundo y se actualizan los datos
-            setTimeout(() => {this.$parent.recargar()}, "1000")
+            setTimeout(() => {this.$parent.recargar()}, "2000")
         },
 
         cerrarModal(){
@@ -49,6 +51,13 @@ export default{
         showConfirmButton: false,
         timer: 4000
         })
+        },
+
+        vaciarFormulario(){
+            this.titulo = "",
+            this.descripcion = "",
+            this.vencimiento = "",
+            this.estado = false
         }
     }
 }

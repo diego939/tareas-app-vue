@@ -52,7 +52,7 @@ export default{
             //cerramos el modal
             this.cerrarModal()
             // se recarga la pagina den un segundo y se actualizan los datos
-            setTimeout(() => {this.$parent.recargar()}, "1000")
+            setTimeout(() => {this.$parent.recargar()}, "2000")
         },
 
         cerrarModal(){
