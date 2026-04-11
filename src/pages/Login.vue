@@ -66,8 +66,8 @@ methods: {
 </script>
 
 <template>
-    <div class="card bg-warning shadow border">
-    <div class="h1 bi bi-person-circle"></div>
+    <div class="card bg-light shadow">
+    <div class="icono bi bi-person-circle"></div>
     <div class="card-body">
         <form v-on:submit.prevent="login">
         <div class="mb-3 mt-3 shadow">
@@ -82,4 +82,14 @@ methods: {
     </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.icono{
+    font-size: 80px;
+}
+
+@media (max-width: 576px) {
+    .icono{
+        font-size: 50px;
+    }
+}
+</style>

@@ -132,9 +132,9 @@ export default {
       <h2 class="bi bi-card-checklist"> Lista de tareas</h2> 
       <div class="card-body row">
         <div class="col-md-4 mt-2 mb-2" v-for="(dato, index) in listardatos" :key="index">
-          <div class="card text-center shadow" style="background-color: bisque;">
-              <h4 class="border border-warning p-2 rounded" style="background-color: burlywood;">{{dato.titulo}}</h4>
-              <div><span class="fw-bold" style="object-fit: cover;">Descripción: </span><span @click="verTarea(dato.titulo,dato.descripcion,moment(dato.vencimiento).format('DD/MM/YYYY'),dato.estado)" :title="dato.descripcion" class="text-success" style="cursor: pointer;">{{dato.descripcion.slice(0, 10)}} <span> 👁️</span></span></div>
+          <div class="card text-center shadow" style="background-color: fff;">
+              <h4 class="border border-warning p-2 rounded bg-light">{{dato.titulo}}</h4>
+              <div><span class="fw-bold" style="object-fit: cover;">Descripción: </span><span @click="verTarea(dato.titulo,dato.descripcion,moment(dato.vencimiento).format('DD/MM/YYYY'),dato.estado)" :title="dato.descripcion" class="text-success" style="cursor: pointer;">{{dato.descripcion.slice(0, 10)}} <span> <i class="bi bi-eye"></i></span></span></div>
               <div class="fw-bold">Vencimiento: <span class="text-primary">"{{moment(dato.vencimiento).format('DD/MM/YYYY')}}"</span></div>
               <div class="m-1">Terminada? : <span style="cursor: pointer;" v-bind:class="dato.estado? 'bg-success badge rounded-pill text-white bi-check-square' : 'bg-danger badge rounded-pill text-white bi-exclamation-triangle'"><span v-if="dato.estado" title="Tarea Completa"> Si</span><span v-else title="Esta tarea falta completar"> No</span> </span></div>
               <div class="">
