@@ -193,7 +193,6 @@ export default {
           <!-- ESTADO -->
 
           <div class="task-status">
-
             <span
               :class="dato.estado ? 'completed' : 'pending'"
             >
@@ -205,36 +204,47 @@ export default {
 
               {{ dato.estado ? 'Completada' : 'Pendiente' }}
             </span>
-
           </div>
 
           <!-- TITULO -->
 
-          <h3 class="task-title">
-            {{ dato.titulo }}
-          </h3>
+          <div class="task-col title-col">
+
+            <h3 class="task-title">
+              {{ dato.titulo }}
+            </h3>
+
+          </div>
 
           <!-- DESCRIPCION -->
 
-          <p
-            class="task-description"
-            @click="verTarea(
-              dato.titulo,
-              dato.descripcion,
-              moment(dato.vencimiento).format('DD/MM/YYYY'),
-              dato.estado
-            )"
-          >
-            {{ dato.descripcion }}
-          </p>
+          <div class="task-col description-col">
+
+            <p
+              class="task-description"
+              @click="verTarea(
+                dato.titulo,
+                dato.descripcion,
+                moment(dato.vencimiento).format('DD/MM/YYYY'),
+                dato.estado
+              )"
+            >
+              {{ dato.descripcion }}
+            </p>
+
+          </div>
 
           <!-- FECHA -->
 
-          <div class="task-date">
+          <div class="task-col date-col">
 
-            <i class="bi bi-calendar-event"></i>
+            <div class="task-date">
 
-            {{ moment(dato.vencimiento).format('DD/MM/YYYY') }}
+              <i class="bi bi-calendar-event"></i>
+
+              {{ moment(dato.vencimiento).format('DD/MM/YYYY') }}
+
+            </div>
 
           </div>
 
@@ -274,23 +284,44 @@ export default {
 
 <style scoped>
 
+:root{
+  --bg-1:#0f172a;
+  --bg-2:#111827;
+  --bg-3:#1e293b;
+
+  --card-1:rgba(30,41,59,.96);
+  --card-2:rgba(15,23,42,.96);
+
+  --text:#ffffff;
+  --text-soft:rgba(255,255,255,.72);
+  --text-muted:rgba(255,255,255,.55);
+
+  --blue:#60a5fa;
+}
+
+/* PAGE */
+
 .tasks-page{
 
   min-height: 100vh;
 
-  padding: 40px 20px;
+  padding: 28px 18px;
 
   background:
     linear-gradient(
       135deg,
-      #0f172a,
-      #111827,
-      #1e293b
+      var(--bg-1),
+      var(--bg-2),
+      var(--bg-3)
     );
 }
 
 .tasks-container{
+
+  width: 100%;
+
   max-width: 1400px;
+
   margin: auto;
 }
 
@@ -304,41 +335,53 @@ export default {
 
   gap: 20px;
 
-  margin-bottom: 40px;
-
   flex-wrap: wrap;
+
+  margin-bottom: 30px;
 }
 
 .title{
 
-  color: white;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 
-  font-size: 42px;
-  font-weight: 700;
+  color: var(--text);
 
-  margin-bottom: 8px;
+  font-size: clamp(30px, 5vw, 42px);
+
+  font-weight: 800;
+
+  margin: 0 0 6px;
 }
 
 .subtitle{
 
-  color: rgba(255,255,255,.65);
+  color: var(--text-muted);
+
+  font-size: 15px;
 
   margin: 0;
 }
 
+/* ACTIONS */
+
 .actions{
+
   display: flex;
-  gap: 12px;
   align-items: center;
+  gap: 12px;
+
+  flex-wrap: wrap;
 }
 
-/* BOTONES */
+/* BUTTONS */
 
 .btn-action{
 
   border: none;
 
-  height: 48px;
+  height: 46px;
 
   padding: 0 18px;
 
@@ -346,13 +389,27 @@ export default {
 
   color: white;
 
+  font-size: 14px;
   font-weight: 600;
-
-  transition: .3s;
 
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
+
+  cursor: pointer;
+
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease;
+}
+
+.btn-action:hover{
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 24px rgba(0,0,0,.25);
 }
 
 .refresh{
@@ -375,14 +432,6 @@ export default {
     );
 }
 
-.btn-action:hover{
-
-  transform: translateY(-2px);
-
-  box-shadow:
-    0 10px 20px rgba(0,0,0,.25);
-}
-
 /* GRID */
 
 .tasks-grid{
@@ -390,7 +439,7 @@ export default {
   display: flex;
   flex-direction: column;
 
-  gap: 20px;
+  gap: 18px;
 }
 
 /* CARD */
@@ -400,30 +449,31 @@ export default {
   width: 100%;
 
   display: flex;
-
-  justify-content: space-between;
   align-items: center;
 
-  gap: 25px;
+  gap: 22px;
 
-  padding: 24px;
+  padding: 20px 24px;
 
   border-radius: 22px;
 
   background:
     linear-gradient(
       135deg,
-      rgba(30,41,59,.95),
-      rgba(15,23,42,.95)
+      var(--card-1),
+      var(--card-2)
     );
 
   border:
     1px solid rgba(255,255,255,.06);
 
-  transition: .3s;
+  transition:
+    transform .25s ease,
+    border-color .25s ease,
+    box-shadow .25s ease;
 
   box-shadow:
-    0 8px 25px rgba(0,0,0,.25);
+    0 10px 30px rgba(0,0,0,.22);
 }
 
 .task-card:hover{
@@ -431,16 +481,40 @@ export default {
   transform: translateY(-3px);
 
   border-color:
-    rgba(59,130,246,.45);
+    rgba(96,165,250,.35);
 
   box-shadow:
-    0 15px 35px rgba(0,0,0,.35);
+    0 18px 35px rgba(0,0,0,.32);
+}
+
+/* COLUMNAS */
+
+.task-col{
+  min-width: 0;
+}
+
+.title-col{
+  width: 220px;
+  flex-shrink: 0;
+}
+
+.description-col{
+  flex: 1;
+  min-width: 0;
+}
+
+.date-col{
+  width: 150px;
+  flex-shrink: 0;
 }
 
 /* STATUS */
 
 .task-status{
-  margin-bottom: 18px;
+
+  width: 160px;
+
+  flex-shrink: 0;
 }
 
 .task-status span{
@@ -454,14 +528,16 @@ export default {
 
   border-radius: 999px;
 
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: .3px;
 }
 
 .completed{
 
   background:
-    rgba(34,197,94,0.15);
+    rgba(34,197,94,.15);
 
   color: #4ade80;
 }
@@ -469,44 +545,51 @@ export default {
 .pending{
 
   background:
-    rgba(251,191,36,0.15);
+    rgba(251,191,36,.15);
 
   color: #facc15;
 }
 
-/* TITULO */
+/* TITLE */
 
 .task-title{
 
   color: white;
 
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 700;
 
-  margin-bottom: 14px;
+  line-height: 1.3;
+
+  margin: 0;
 }
 
-/* DESCRIPCION */
+/* DESCRIPTION */
 
 .task-description{
 
-  color:
-    rgba(255,255,255,.72);
+  color: var(--text-soft);
 
-  line-height: 1.6;
+  margin: 0;
 
-  margin-bottom: 22px;
+  font-size: 14px;
+
+  line-height: 1.5;
 
   cursor: pointer;
 
-  transition: .3s;
+  transition: .25s ease;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .task-description:hover{
   color: white;
 }
 
-/* FECHA */
+/* DATE */
 
 .task-date{
 
@@ -514,11 +597,10 @@ export default {
   align-items: center;
   gap: 8px;
 
-  color: #60a5fa;
+  color: var(--blue);
 
   font-size: 14px;
-
-  margin-bottom: 22px;
+  font-weight: 500;
 }
 
 /* ACTIONS */
@@ -526,8 +608,16 @@ export default {
 .task-actions{
 
   display: flex;
-  gap: 12px;
+  align-items: center;
+
+  gap: 10px;
+
+  margin-left: auto;
+
+  flex-shrink: 0;
 }
+
+/* BUTTONS CARD */
 
 .btn-card{
 
@@ -536,7 +626,7 @@ export default {
 
   border: none;
 
-  border-radius: 12px;
+  border-radius: 14px;
 
   display: flex;
   align-items: center;
@@ -544,7 +634,23 @@ export default {
 
   color: white;
 
-  transition: .3s;
+  cursor: pointer;
+
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease;
+}
+
+.btn-card i{
+  font-size: 16px;
+}
+
+.btn-card:hover{
+
+  transform: scale(1.08);
+
+  box-shadow:
+    0 12px 20px rgba(0,0,0,.28);
 }
 
 .edit{
@@ -567,34 +673,140 @@ export default {
     );
 }
 
-.btn-card:hover{
+/* TABLET */
 
-  transform: scale(1.08);
+@media(max-width: 950px){
 
-  box-shadow:
-    0 10px 20px rgba(0,0,0,.25);
+  .task-card{
+
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 18px;
+  }
+
+  .task-status,
+  .title-col,
+  .description-col,
+  .date-col{
+    width: 100%;
+  }
+
+  .task-description{
+
+    white-space: normal;
+
+    display: -webkit-box;
+
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+
+  .task-actions{
+
+    width: 100%;
+
+    justify-content: flex-end;
+  }
 }
 
 /* MOBILE */
 
-@media(max-width: 768px){
+@media(max-width: 640px){
 
-  .title{
-    font-size: 32px;
+  .tasks-page{
+    padding: 18px 12px;
   }
 
   .topbar{
-    align-items: flex-start;
+    margin-bottom: 24px;
+  }
+
+  .title{
+    font-size: 28px;
+  }
+
+  .subtitle{
+    font-size: 14px;
   }
 
   .actions{
     width: 100%;
-    flex-wrap: wrap;
   }
 
   .btn-action{
+
     flex: 1;
-    justify-content: center;
+
+    min-width: 120px;
+
+    height: 44px;
+
+    font-size: 13px;
+  }
+
+  .task-card{
+
+    padding: 18px;
+
+    border-radius: 18px;
+  }
+
+  .task-title{
+
+    font-size: 17px;
+  }
+
+  .task-description{
+
+    font-size: 13.5px;
+
+    line-height: 1.5;
+  }
+
+  .task-date{
+
+    font-size: 13px;
+  }
+
+  .task-actions{
+
+    width: 100%;
+
+    justify-content: space-between;
+  }
+
+  .btn-card{
+
+    width: 48%;
+    height: 44px;
+
+    border-radius: 12px;
+  }
+
+  .btn-card i{
+    font-size: 15px;
+  }
+}
+
+/* EXTRA SMALL */
+
+@media(max-width: 420px){
+
+  .title{
+    font-size: 25px;
+  }
+
+  .task-status span{
+    font-size: 11px;
+  }
+
+  .task-title{
+    font-size: 16px;
+  }
+
+  .task-description{
+    font-size: 13px;
   }
 }
 
