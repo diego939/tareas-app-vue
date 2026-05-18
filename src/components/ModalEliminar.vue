@@ -75,37 +75,255 @@ export default{
 </script>
 
 <template>
-    
-    <!-- The Modal -->
-    <div class="modal" id="myModalEliminar">
-    <div class="modal-dialog">
-        <div class="modal-content text-dark" style="background-color:beige">
 
-        <!-- Modal Header -->
-        <div class="modal-header">
-            <h4 class="modal-title text-center"> Eliminar Tarea</h4>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+  <div
+    class="modal fade"
+    id="myModalEliminar"
+    tabindex="-1"
+  >
+
+    <div class="modal-dialog modal-dialog-centered">
+
+      <div class="modal-content delete-modal">
+
+        <!-- BODY -->
+
+        <div class="delete-body">
+
+          <!-- ICON -->
+
+          <div class="delete-icon">
+
+            <i class="bi bi-trash3-fill"></i>
+
+          </div>
+
+          <!-- TEXT -->
+
+          <h3 class="delete-title">
+            Eliminar tarea
+          </h3>
+
+          <p class="delete-description">
+            Esta acción marcará la tarea como eliminada.
+            Podrás recuperarla más adelante si lo deseas.
+          </p>
+
+          <!-- ACTIONS -->
+
+          <div class="delete-actions">
+
+            <button
+              type="button"
+              class="btn-cancel"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+
+            <button
+              type="button"
+              class="btn-delete"
+              @click="eliminar"
+            >
+              <i class="bi bi-trash3"></i>
+              Eliminar
+            </button>
+
+          </div>
+
         </div>
 
-        <!-- Modal body -->
-        <div class="modal-body">
-            <form v-on:submit.prevent="editar">
-                <div class="card" v-bind:class="estado? 'text-white bg-secondary' : 'text-white bg-danger'">
-                    <div class="card-header h4">Titulo: {{ titulo }}</div>
-                    <div class="card-body">
-                        <div>Descripción: {{ descripcion }}</div>
+      </div>
 
-                    </div>
-                    <div class="card-footer">Vencimiento: {{ moment(vencimiento).format('DD/MM/YYYY') }}</div>
-                </div>
-            <button type="submit" class="btn btn-dark bi-trash m-2" @click="eliminar(id)"> Eliminar</button>
-            </form>
-        </div>
-
-        </div>
     </div>
-    </div>
+
+  </div>
+
 </template>
 
 <style scoped>
+
+/* MODAL */
+
+.delete-modal{
+
+  border: 1px solid rgba(255,255,255,.08);
+
+  border-radius: 28px;
+
+  overflow: hidden;
+
+  background:
+    rgba(15,23,42,.96);
+
+  backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.45);
+}
+
+/* BODY */
+
+.delete-body{
+
+  padding: 40px 30px;
+
+  text-align: center;
+}
+
+/* ICON */
+
+.delete-icon{
+
+  width: 90px;
+  height: 90px;
+
+  margin: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background:
+    rgba(239,68,68,.12);
+
+  border:
+    1px solid rgba(239,68,68,.2);
+
+  margin-bottom: 24px;
+}
+
+.delete-icon i{
+
+  font-size: 38px;
+
+  color: #ef4444;
+}
+
+/* TITULO */
+
+.delete-title{
+
+  color: white;
+
+  font-size: 30px;
+  font-weight: 700;
+
+  margin-bottom: 14px;
+}
+
+/* DESCRIPTION */
+
+.delete-description{
+
+  color:
+    rgba(255,255,255,.65);
+
+  line-height: 1.7;
+
+  font-size: 15px;
+
+  max-width: 360px;
+
+  margin:
+    0 auto 32px auto;
+}
+
+/* ACTIONS */
+
+.delete-actions{
+
+  display: flex;
+  justify-content: center;
+
+  gap: 14px;
+}
+
+.btn-cancel,
+.btn-delete{
+
+  height: 52px;
+
+  padding: 0 24px;
+
+  border: none;
+
+  border-radius: 14px;
+
+  font-weight: 600;
+
+  transition: .3s;
+}
+
+/* CANCEL */
+
+.btn-cancel{
+
+  background:
+    rgba(255,255,255,.08);
+
+  color: white;
+}
+
+/* DELETE */
+
+.btn-delete{
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ef4444,
+      #dc2626
+    );
+
+  color: white;
+}
+
+/* HOVERS */
+
+.btn-cancel:hover,
+.btn-delete:hover{
+
+  transform: translateY(-2px);
+}
+
+.btn-delete:hover{
+
+  box-shadow:
+    0 12px 24px rgba(239,68,68,.25);
+}
+
+/* MOBILE */
+
+@media(max-width: 576px){
+
+  .modal-dialog{
+    margin: 14px;
+  }
+
+  .delete-actions{
+
+    flex-direction: column;
+  }
+
+  .btn-cancel,
+  .btn-delete{
+
+    width: 100%;
+
+    justify-content: center;
+  }
+
+  .delete-title{
+    font-size: 26px;
+  }
+}
+
 </style>
